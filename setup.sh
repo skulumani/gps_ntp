@@ -91,3 +91,5 @@ echo "NTP log directory"
 mkdir -p /home/pi/ntpstats
 
 
+# setup I2C screen
+sudo apt-get install python3-pip
