@@ -7,7 +7,7 @@ sudo cp -a ./mrtg/. /etc/mrtg/
 sudo cp mrtg.conf /etc/apache2/sites-available/mrtg.conf
 
 echo "Restart MRTG"
-sudo indexmaker /etc/mrtg/mrtg.cfg > /home/pi/www/mrtg/index.html
+sudo indexmaker --section=title /etc/mrtg/mrtg.cfg > /home/pi/www/mrtg/index.html
 sudo /etc/init.d/mrtg restart
 
 sudo a2ensite mrtg
