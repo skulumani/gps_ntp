@@ -17,7 +17,7 @@ modes = {
 }
 
 # these require no extra computations (single value graph)
-gpsd_targets = {
+tpv_targets = {
     'ept': 'Timestamp Error (s)', # seconds
     'epx': 'Longitude Error (m)', # meters
     'epy': 'Latitude Error (m)', # meters
@@ -29,7 +29,9 @@ gpsd_targets = {
 }
 
 # these do some extra calculations then output a value for MRTG (possibly double value graph)
-custom_targets = {}
+sky_targets = {
+    'sats': 'Satellites',
+}
 
 # takes STDIN input from gpspipe -w and parses output into MRTG format based on user defined variable (pick correct key from TPV or SKY messages)
 
@@ -39,6 +41,20 @@ custom_targets = {}
 
 # sys.stdout.write(str(sentence['lat']) + '\n')
 # sys.stdout.flush()
+def print_custom_targets(sentence, desired_key):
+    """Print custom targets for SKY message"""
+    
+    satellites = sentence['satellites']
+    # get total number of satellites
+    sats_avail = len(satellites)
+
+    # get satellites used
+    sats_used = sum([ s['used'] for s in satellites ])
+
+    print(sats_avail)
+    print(sats_used)
+    print(0)
+    print('Satellites')
 
 
 if __name__ == "__main__":
@@ -51,16 +67,19 @@ if __name__ == "__main__":
                 break # exit on EOF
 
             sentence = json.loads(line)
-            if sentence['class'] == 'TPV' or sentence['class'] == 'SKY':
-                if desired_key in gpsd_targets:
+            if sentence['class'] == 'TPV':
+                if desired_key in tpv_targets:
                     print(0)
                     print(sentence[desired_key])
                     print(0)
-                    print(gpsd_targets[desired_key])
+                    print(tpv_targets[desired_key])
                 
                     sys.exit(0)
-                elif desired_key in custom_targets:
-                    pass
+            elif sentence['class'] == 'SKY':
+                if desired_key in sky_targets:
+                    print_custom_targets(sentence, desired_key)
+                    sys.exit(0)
+
 
     except IOError as e:
         if e.errno == errno.EPIPE:
