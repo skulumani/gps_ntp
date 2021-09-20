@@ -3,7 +3,7 @@
 echo "Reloading SNMP, NTP, MRTG, and Apace"
 
 echo "Copying config files"
-sudo cp mrtg.cfg /etc/mrtg/mrtg.cfg
+sudo cp ./mrtg/. /etc/mrtg/
 sudo cp mrtg.conf /etc/apache2/sites-available/mrtg.conf
 
 echo "Restart MRTG"
