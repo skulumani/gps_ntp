@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 
 # parse json messages from gpspipe
 # documentation here https://gpsd.gitlab.io/gpsd/gpsd_json.html
