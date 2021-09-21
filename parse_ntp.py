@@ -45,7 +45,6 @@ if __name__ == "__main__":
             if desired_key == "offset":
                 get_offset(lines)
             if desired_key == "jitter":
-                print(lines)
                 get_jitter(lines)
 
     except IOError as e:

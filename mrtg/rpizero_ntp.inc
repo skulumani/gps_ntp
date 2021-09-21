@@ -9,11 +9,11 @@ Unscaled[rpizero_ntp_offset]: dwmy
 Title[rpizero_ntp_offset]: NTP Offset
 Options[rpizero_ntp_offset]: integer, gauge, nopercent, growright
 YLegend[rpizero_ntp_offset]: offset + 100us
-ShortLegend[rpizero_ntp_offset]: ľs 
+ShortLegend[rpizero_ntp_offset]: us
 LegendI[rpizero_ntp_offset]: 
-LegendO[rpizero_ntp_offset]: offset + 100ľs:&nbsp;
+LegendO[rpizero_ntp_offset]: offset + 100us:&nbsp;
 Legend1[rpizero_ntp_offset]: n/a
-Legend2[rpizero_ntp_offset]: time offset in ľs, with 100ľs added to ensure it's positive
+Legend2[rpizero_ntp_offset]: time offset in us, with 100ľs added to ensure it's positive
 PageTop[rpizero_ntp_offset]: <H2>NTP Offset</H2>
 
 
