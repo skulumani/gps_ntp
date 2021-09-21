@@ -2,7 +2,7 @@
 # NTP Offset
 #-------------------------------------------------------------------------------
 
-Target[rpizero_ntp_offset]: `ntpq -c rv | python3 parse_ntp.py offset`
+Target[rpizero_ntp_offset]: `ntpq -c rv | python3 /home/pi/gps_ntp/parse_ntp.py offset`
 MaxBytes[rpizero_ntp_offset]: 100
 MaxBytes2[rpizero_ntp_offset]: 200
 Unscaled[rpizero_ntp_offset]: dwmy
@@ -21,7 +21,7 @@ PageTop[rpizero_ntp_offset]: <H2>NTP Offset</H2>
 # NTP Jitter
 #-------------------------------------------------------------------------------
 
-Target[rpizero_ntp_jitter]: `ntpq -c rv | python3 parse_ntp.py jitter`
+Target[rpizero_ntp_jitter]: `ntpq -c rv | python3 /home/pi/gps_ntp/parse_ntp.py jitter`
 MaxBytes[rpizero_ntp_jitter]: 1000000000
 Title[rpizero_ntp_jitter]: NTP Jitter
 Options[rpizero_ntp_jitter]: integer, gauge, nopercent, growright

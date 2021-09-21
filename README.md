@@ -11,6 +11,8 @@ MRTG Plots
     * GPS MRTG - https://www.satsignal.eu/raspberry-pi/monitoring.html#gps
     * Sats visible
     * DOP
+    * errors 
+    * lat,long,alt
     * `gpspipe -r` and search for GPGGA and GPGSA and parse for stats
 * [ ] CPU, Mem, wifi load, CPU temperature, storage
     * Use SNMP OIDs or use a shell script directly
@@ -21,6 +23,13 @@ MRTG Plots
     * MRTG conf
     * apache conf
     * website pages
+* [ ] Fix reload config script to move other config files
+    * snmp
+    * dhclient
+    * apache default website config
+    * gpsd
+    * ntp
+    * website files
 * [ ] Check on updating the leapsecond file (does NTP do it or do I need to do it)
 * [ ] Add current time to Index page with offset
 * [ ] Once time is working then join NTP pool - will need to do duckdns and port forwarding on router
