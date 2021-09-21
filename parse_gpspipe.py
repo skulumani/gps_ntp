@@ -51,8 +51,8 @@ def print_custom_targets(sentence, desired_key):
     # get satellites used
     sats_used = sum([ s['used'] for s in satellites ])
 
-    print(sats_avail)
     print(sats_used)
+    print(sats_avail)
     print(0)
     print('Satellites')
 
