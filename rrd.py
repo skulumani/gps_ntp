@@ -178,16 +178,19 @@ def create_rrd():
         "RRA:MIN:0.5:18.75:105192",
     )
 
-def add_rpi_data():
+def get_rpi_data():
     pass
 
-def add_gps_stats():
+def get_gps_stats():
     pass
 
-def add_gps_sats():
+def get_gps_sats():
     pass
 
-def add_ntp_data():
+def get_ntp_data():
+    pass
+
+def update_rrd():
     pass
 
 # GPS data
