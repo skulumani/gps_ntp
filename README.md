@@ -47,3 +47,6 @@
 
 NTP Best practices - https://tools.ietf.org/id/draft-ietf-ntp-bcp-06.html#rfc.section.4.4
 To get ntp stats use `ntpq -c rv` then grep for desired data
+
+* [rrd calculator](https://eccentric.one/misc/rrdcalc.html)
+*
