@@ -9,7 +9,7 @@ import os
 def create_rrd():
     main_path = "/home/pi/rrd"
     if not os.path.isdir(main_path):
-        os.makedires(main_path)
+        os.makedirs(main_path)
 
     # Rpi, GPS and NTP Stats
     rrdtool.create(
