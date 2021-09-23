@@ -4,6 +4,8 @@
 import rrdtool
 import sys
 import os
+import psutil
+import subprocess
 
 # RPi data
 def create_rrd():
@@ -178,7 +180,23 @@ def create_rrd():
         "RRA:MIN:0.5:320s:365d")
 
 def get_rpi_data():
-    pass
+
+    # get cpu usage percent
+    cpu_percent = psutil.cpu_percent(interval=0.1)
+    # mem usage percent
+    memory = psutil.virtual_memory()
+    mem_percent = memor.percent
+
+    # disk usage percent
+    disk = psutil.disk('/')
+    disk_percent = disk.percent
+
+    # cpu temp
+    process = subprocess.Popen(['vcgencmd', 'measure_temp'], stdout=subprocess.PIPE)
+    output, _error = process.communicate()
+    cpu_temp = float(output.index('=') + 1:output.rindex("'"))
+
+    return cpu_temp
 
 def get_gps_stats():
     pass
@@ -199,4 +217,7 @@ def update_rrd():
 # NTP data
 
 if __name__ == "__main__":
-    create_rrd()
+    #create_rrd()
+
+    # TODO Add argument parsing create RRD, update rrd, graph rrd
+    get_rpi_data()
