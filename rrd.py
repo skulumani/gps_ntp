@@ -172,11 +172,10 @@ def create_rrd():
         "DS:ntp_gps_jitter:GAUGE:32:0:100", # units in ms
         "RRA:AVERAGE:0.5:1.875:20160", # 7 days at 30 seconds
         "RRA:AVERAGE:0.5:18.75:105192", # 365.25 days at 5 minutes
-        "RRA:MAX:0.5:1.875:20160", 
+        "RRA:MAX:0.5:1.875:20160",
         "RRA:MAX:0.5:18.75:105192",
         "RRA:MIN:0.5:1.875:20160",
-        "RRA:MIN:0.5:18.75:105192",
-    )
+        "RRA:MIN:0.5:18.75:105192")
 
 def get_rpi_data():
     pass
