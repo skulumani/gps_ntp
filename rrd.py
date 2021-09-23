@@ -6,6 +6,7 @@ import sys
 import os
 import psutil
 import subprocess
+from collections import namedtuple
 
 # RPi data
 def create_rrd():
@@ -194,9 +195,12 @@ def get_rpi_data():
     # cpu temp
     process = subprocess.Popen(['vcgencmd', 'measure_temp'], stdout=subprocess.PIPE)
     output, _error = process.communicate()
-    cpu_temp = float(output.index('=') + 1:output.rindex("'"))
+    cpu_temp = float(output[output.index('=') + 1:output.rindex("'")])
+    
+    RPi_data = namedtuple(RPi_data, "cpu_percent mem_percent disk_percent cpu_temp")
+    rpi_data = Rpi_data(cpu_percent, mem_percent, disk_percent, cpu_temp)
 
-    return cpu_temp
+    return rpi_data
 
 def get_gps_stats():
     pass
