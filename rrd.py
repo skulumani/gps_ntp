@@ -189,7 +189,7 @@ def get_rpi_data():
     mem_percent = memory.percent
 
     # disk usage percent
-    disk = psutil.disk('/')
+    disk = psutil.disk_usage('/')
     disk_percent = disk.percent
 
     # cpu temp
