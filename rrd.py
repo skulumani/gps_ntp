@@ -15,7 +15,7 @@ def create_rrd():
     rrdtool.create(
         os.path.join(main_path, "gps_clock_stats.rrd"),
         "--start", "now", 
-        "--step", "10", 
+        "--step", "16s", 
         "DS:cpu_usage_percent:GAUGE:32:0:100",
         "DS:mem_usage_percent:GAUGE:32:0:100",
         "DS:disk_usage_percent:GAUGE:32:0:100",
@@ -170,12 +170,12 @@ def create_rrd():
         "DS:ntp_pps_jitter:GAUGE:32:0:100", # units in ms
         "DS:ntp_gps_offset:GAUGE:32:-100:100", # units in ms
         "DS:ntp_gps_jitter:GAUGE:32:0:100", # units in ms
-        "RRA:AVERAGE:0.5:1.875:20160", # 7 days at 30 seconds
-        "RRA:AVERAGE:0.5:18.75:105192", # 365.25 days at 5 minutes
-        "RRA:MAX:0.5:1.875:20160",
-        "RRA:MAX:0.5:18.75:105192",
-        "RRA:MIN:0.5:1.875:20160",
-        "RRA:MIN:0.5:18.75:105192")
+        "RRA:AVERAGE:0.5:64s:7d", # 7 days at 30 seconds
+        "RRA:AVERAGE:0.5:320s:365d", # 365.25 days at 5 minutes
+        "RRA:MAX:0.5:64s:7d",
+        "RRA:MAX:0.5:320s:365d",
+        "RRA:MIN:0.5:64s:7d",
+        "RRA:MIN:0.5:320s:365d")
 
 def get_rpi_data():
     pass
@@ -197,3 +197,6 @@ def update_rrd():
 # GPS satellites
 
 # NTP data
+
+if __name__ == "__main__":
+    create_rrd()
