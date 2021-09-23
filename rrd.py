@@ -193,12 +193,12 @@ def get_rpi_data():
     disk_percent = disk.percent
 
     # cpu temp
-    process = subprocess.Popen(['vcgencmd', 'measure_temp'], stdout=subprocess.PIPE)
+    process = subprocess.Popen(['vcgencmd', 'measure_temp'], stdout=subprocess.PIPE, universal_newlines=True)
     output, _error = process.communicate()
     cpu_temp = float(output[output.index('=') + 1:output.rindex("'")])
     
-    RPi_data = namedtuple(RPi_data, "cpu_percent mem_percent disk_percent cpu_temp")
-    rpi_data = Rpi_data(cpu_percent, mem_percent, disk_percent, cpu_temp)
+    RPi_data = namedtuple("RPi_data", "cpu_percent mem_percent disk_percent cpu_temp")
+    rpi_data = RPi_data(cpu_percent, mem_percent, disk_percent, cpu_temp)
 
     return rpi_data
 
@@ -224,4 +224,5 @@ if __name__ == "__main__":
     #create_rrd()
 
     # TODO Add argument parsing create RRD, update rrd, graph rrd
-    get_rpi_data()
+    rpi_data = get_rpi_data()
+    print(rpi_data)
