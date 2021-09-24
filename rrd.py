@@ -5,6 +5,7 @@ import rrdtool
 import sys
 import os
 import psutil
+import json
 import subprocess
 from collections import namedtuple
 
@@ -203,10 +204,21 @@ def get_rpi_data():
     return rpi_data
 
 def get_gps_stats():
-    pass
+    # SKY
+    process = subprocess.run('gpspipe -w -T %s | grep -m 1 SKY', shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
+    message = process.stdout
+    
+    sky_t = float(message[0:message.index(':')])
+    sky = json.loads(message[message.index(':') + 1:])
 
-def get_gps_sats():
-    pass
+    # TPV
+    process = subprocess.run('gpspipe -w -T %s | grep -m 1 TPV', shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
+    message = process.stdout
+
+    tpv_t = float(message[0:message.index(':')])
+    tpv = json.loads(message[message.index(':') + 1:])
+
+    return (sky_t, sky, tpv_t, tpv)
 
 def get_ntp_data():
     pass
@@ -214,9 +226,7 @@ def get_ntp_data():
 def update_rrd():
     pass
 
-# GPS data
 
-# GPS satellites
 
 # NTP data
 
@@ -226,3 +236,6 @@ if __name__ == "__main__":
     # TODO Add argument parsing create RRD, update rrd, graph rrd
     rpi_data = get_rpi_data()
     print(rpi_data)
+
+    (sky_t, sky, tpv_t, tpv) = get_gps_stats()
+
