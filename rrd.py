@@ -208,20 +208,23 @@ def get_gps_stats():
     process = subprocess.run('gpspipe -w -T %s | grep -m 1 SKY', shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
     message = process.stdout
     
-    sky_t = float(message[0:message.index(':')])
     sky = json.loads(message[message.index(':') + 1:])
+    sky['time'] = float(message[0:message.index(':')])
 
     # TPV
     process = subprocess.run('gpspipe -w -T %s | grep -m 1 TPV', shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
     message = process.stdout
 
-    tpv_t = float(message[0:message.index(':')])
     tpv = json.loads(message[message.index(':') + 1:])
+    tpv['time'] = float(message[0:message.index(':')])
 
-    return (sky_t, sky, tpv_t, tpv)
+    return (sky, tpv)
 
 def get_ntp_data():
-    pass
+    process = subprocess.run('ntpq -c rv', shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
+    message = process.stdout
+
+    return message  
 
 def update_rrd():
     pass
@@ -237,5 +240,5 @@ if __name__ == "__main__":
     rpi_data = get_rpi_data()
     print(rpi_data)
 
-    (sky_t, sky, tpv_t, tpv) = get_gps_stats()
+    (sky, tpv) = get_gps_stats()
 
