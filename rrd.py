@@ -214,13 +214,28 @@ def get_gps_stats():
     
     sky = json.loads(message[message.index(':') + 1:])
     sky['time'] = float(message[0:message.index(':')])
+    
+    # build PRN data
+    prn_el = [-1] * 32
+    prn_az = [-1] * 32
+    prn_ss = [-1] * 32
+    prn_used = [-1] * 32
+    
+    for sat in sky['satellites']:
+        prn = sat['PRN'] - 1
+        prn_el[prn] = sat['el']
+        prn_az[prn] = sat['az']
+        prn_ss[prn] = sat['ss']
+        prn_used[prn] = int(sat['used']) 
 
     # TPV
     process = subprocess.run('gpspipe -w -T %s | grep -m 1 TPV', shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
     message = process.stdout
-
+    
     tpv = json.loads(message[message.index(':') + 1:])
     tpv['time'] = float(message[0:message.index(':')])
+    
+    # build namedtuple for gps data
 
     return (sky, tpv)
 
@@ -270,10 +285,9 @@ if __name__ == "__main__":
 
     # TODO Add argument parsing create RRD, update rrd, graph rrd
     rpi_data = get_rpi_data()
-    print(rpi_data.time)
 
     (sky, tpv) = get_gps_stats()
-    print(sky['time'])
+    print(sky)
 
     ntp_data = get_ntp_data()    
     print(ntp_data.time)
