@@ -185,7 +185,8 @@ def create_rrd():
         "RRA:MIN:0.5:320s:365d")
 
 def get_rpi_data():
-
+    
+    rpi_time = time.time()
     # get cpu usage percent
     cpu_percent = psutil.cpu_percent(interval=0.1)
     # mem usage percent
@@ -201,8 +202,8 @@ def get_rpi_data():
     output, _error = process.communicate()
     cpu_temp = float(output[output.index('=') + 1:output.rindex("'")])
     
-    RPi_data = namedtuple("RPi_data", "cpu_percent mem_percent disk_percent cpu_temp")
-    rpi_data = RPi_data(cpu_percent, mem_percent, disk_percent, cpu_temp)
+    RPi_data = namedtuple("RPi_data", "cpu_percent mem_percent disk_percent cpu_temp time")
+    rpi_data = RPi_data(cpu_percent, mem_percent, disk_percent, cpu_temp, rpi_time)
 
     return rpi_data
 
@@ -224,7 +225,7 @@ def get_gps_stats():
     return (sky, tpv)
 
 def get_ntp_data():
-    time = time.time()
+    ntp_time = time.time()
     process = subprocess.run('ntpq -c rv', shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
     message = process.stdout
     message = message.replace('\n', '')
@@ -248,8 +249,14 @@ def get_ntp_data():
 
     gps_offset = float(message[8])
     gps_jitter = float(message[9])
-    
 
+    NTP_data = namedtuple("NTP_data", "offset frequency sys_jitter clk_jitter clk_wander pps_offset pps_jitter gps_offset gps_jitter time")
+    ntp_data = NTP_data(offset, frequency, sys_jitter, clk_jitter, clk_wander,
+                        pps_offset, pps_jitter,
+                        gps_offset, gps_jitter, ntp_time)
+    
+    return ntp_data
+ 
 def update_rrd():
     # need to update all DS at the same time
     pass
@@ -263,7 +270,10 @@ if __name__ == "__main__":
 
     # TODO Add argument parsing create RRD, update rrd, graph rrd
     rpi_data = get_rpi_data()
-    print(rpi_data)
+    print(rpi_data.time)
 
     (sky, tpv) = get_gps_stats()
+    print(sky['time'])
 
+    ntp_data = get_ntp_data()    
+    print(ntp_data.time)
