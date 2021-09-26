@@ -236,6 +236,13 @@ def get_gps_stats():
     tpv['time'] = float(message[0:message.index(':')])
     
     # build namedtuple for gps data
+    GPS_data = namedtuple('GPS_data', ['lat', 'lon', 'alt', 'epx', 'epy', 'epv',
+                                       'xdop', 'ydop', 'vdop', 'tdop', 'hdop', 'gdop', 'pdop', 
+                                       'PRN1_el', 'PRN1_az', 'PRN1_ss', 'PRN1_used',
+                                       'PRN2_el', 'PRN2_az', 'PRN2_ss', 'PRN2_used',
+                                       'PRN3_el', 'PRN3_az', 'PRN3_ss', 'PRN3_used'
+                                       ])
+
 
     return (sky, tpv)
 
