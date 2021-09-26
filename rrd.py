@@ -8,6 +8,9 @@ import psutil
 import json
 import subprocess
 from collections import namedtuple
+import time
+import datetime
+
 
 # RPi data
 def create_rrd():
@@ -221,12 +224,34 @@ def get_gps_stats():
     return (sky, tpv)
 
 def get_ntp_data():
+    time = time.time()
     process = subprocess.run('ntpq -c rv', shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
     message = process.stdout
+    message = message.replace('\n', '')
+    message = message.split(',')
+    
+    offset = float(message[20][message[20].index("=") + 1:])
+    frequency = float(message[21][message[21].index("=") + 1:])
+    sys_jitter = float(message[22][message[22].index("=") + 1:])
+    clk_jitter = float(message[23][message[23].index("=") + 1:])
+    clk_wander = float(message[24][message[24].index("=") + 1:])
+   
+    # now get ntpq -p data  
+    process = subprocess.run("ntpq -p | grep '.PPS.'", shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
+    message = process.stdout.split()
+    
+    pps_offset = float(message[8])
+    pps_jitter = float(message[9])
 
-    return message  
+    process = subprocess.run("ntpq -p | grep '.GPS.'", shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
+    message = process.stdout.split()
+
+    gps_offset = float(message[8])
+    gps_jitter = float(message[9])
+    
 
 def update_rrd():
+    # need to update all DS at the same time
     pass
 
 
