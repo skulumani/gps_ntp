@@ -14,8 +14,8 @@ sudo apt-get install -y scons libncurses-dev python-dev python3-dev pps-tools gi
 wget http://download.savannah.gnu.org/releases/gpsd/gpsd-${GPS_VERSION}.tar.gz -O ${WORK_DIR}/gpsd.tar.gz
 cd $WORK_DIR
 
-tar -xzf gpsd.tar.gz -C gpsd
-cd gpsd
+tar -xzf gpsd.tar.gz
+cd gpsd-${GPS_VERSION}
 
 sudo scons
 # sudo scons --config=force
@@ -25,6 +25,11 @@ sudo scons install
 echo "Hold GPSD with apt"
 echo "gpsd hold" | sudo dpkg --set-selections
 gpsd -V
+
+sudo systemctl daemon-reload
+sudo systemctl enable gpsd
+sudo systemctl start gpsd
+
 
 
 
