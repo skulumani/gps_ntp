@@ -276,10 +276,10 @@ def get_gps_stats():
                                        ])
 
     # populate the tuple
-    gps_data = GPS_data(tpv_time=tpv['time'], sky_time=sky['time'],
-                        lat=tpv['lat'], lon=tpv['lon'], alt=tpv['alt'], epx=tpv['epx'], epy=tpv['epy'], epv=tpv['epv'],
-                        xdop=sky['xdop'], ydop=sky['ydop'], vdop=sky['vdop'], tdop=sky['tdop'], hdop=sky['hdop'], gdop=sky['gdop'], pdop=sky['pdop'],
-                        )
+    #gps_data = GPS_data(tpv_time=tpv['time'], sky_time=sky['time'],
+                        #lat=tpv['lat'], lon=tpv['lon'], alt=tpv['alt'], epx=tpv['epx'], epy=tpv['epy'], epv=tpv['epv'],
+                        #xdop=sky['xdop'], ydop=sky['ydop'], vdop=sky['vdop'], tdop=sky['tdop'], hdop=sky['hdop'], gdop=sky['gdop'], pdop=sky['pdop'],
+                        #)
 
 
 
