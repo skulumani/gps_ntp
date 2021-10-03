@@ -5,8 +5,8 @@
     * [ ] install rrdtool and python 3 version
     * [ ] Create database
     * [ ] Python script to read data to store (pipe into python then write to rrd)
-        * RPI Stats - 1 sec - CPU usage %, Mem usage %, Disk %, CPU temp
-        * GPS Stats - 10 sec - lat, lon, alt, epx, epy, epv, xdop, ydop, vdop, tdop, hdop, gdop, pdop
+        * RPI Stats - 10 sec - CPU usage %, Mem usage %, Disk %, CPU temp
+        * GPS Stats - 10 sec - TPV and SKY lat, lon, alt, epx, epy, epv, xdop, ydop, vdop, tdop, hdop, gdop, pdop
         * GPS Sats - 10 sec - PRN 1-32 each with el, az, ss, used (0 or 1)
         * NTP stats - 16 sec - ntpq -c rv, offset, frequency, sys_jitter, clk_jitter, clk_wander
             * ntpq -p - PPS and GPS each offset and jitter
