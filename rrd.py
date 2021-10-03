@@ -236,12 +236,49 @@ def get_gps_stats():
     tpv['time'] = float(message[0:message.index(':')])
     
     # build namedtuple for gps data
-    GPS_data = namedtuple('GPS_data', ['lat', 'lon', 'alt', 'epx', 'epy', 'epv',
+    GPS_data = namedtuple('GPS_data', ['tpv_time', 'sky_time',
+                                       'lat', 'lon', 'alt', 'epx', 'epy', 'epv',
                                        'xdop', 'ydop', 'vdop', 'tdop', 'hdop', 'gdop', 'pdop', 
                                        'PRN1_el', 'PRN1_az', 'PRN1_ss', 'PRN1_used',
                                        'PRN2_el', 'PRN2_az', 'PRN2_ss', 'PRN2_used',
                                        'PRN3_el', 'PRN3_az', 'PRN3_ss', 'PRN3_used'
+                                       'PRN4_el', 'PRN4_az', 'PRN4_ss', 'PRN4_used'
+                                       'PRN5_el', 'PRN5_az', 'PRN5_ss', 'PRN5_used'
+                                       'PRN6_el', 'PRN6_az', 'PRN6_ss', 'PRN6_used'
+                                       'PRN7_el', 'PRN7_az', 'PRN7_ss', 'PRN7_used'
+                                       'PRN8_el', 'PRN8_az', 'PRN8_ss', 'PRN8_used'
+                                       'PRN9_el', 'PRN9_az', 'PRN9_ss', 'PRN9_used'
+                                       'PRN10_el', 'PRN10_az', 'PRN10_ss', 'PRN10_used'
+                                       'PRN11_el', 'PRN11_az', 'PRN11_ss', 'PRN11_used'
+                                       'PRN12_el', 'PRN12_az', 'PRN12_ss', 'PRN12_used'
+                                       'PRN13_el', 'PRN13_az', 'PRN13_ss', 'PRN13_used'
+                                       'PRN14_el', 'PRN14_az', 'PRN14_ss', 'PRN14_used'
+                                       'PRN15_el', 'PRN15_az', 'PRN15_ss', 'PRN15_used'
+                                       'PRN16_el', 'PRN16_az', 'PRN16_ss', 'PRN16_used'
+                                       'PRN17_el', 'PRN17_az', 'PRN17_ss', 'PRN17_used'
+                                       'PRN18_el', 'PRN18_az', 'PRN18_ss', 'PRN18_used'
+                                       'PRN19_el', 'PRN19_az', 'PRN19_ss', 'PRN19_used'
+                                       'PRN20_el', 'PRN20_az', 'PRN20_ss', 'PRN20_used'
+                                       'PRN21_el', 'PRN21_az', 'PRN21_ss', 'PRN21_used'
+                                       'PRN22_el', 'PRN22_az', 'PRN22_ss', 'PRN22_used'
+                                       'PRN23_el', 'PRN23_az', 'PRN23_ss', 'PRN23_used'
+                                       'PRN24_el', 'PRN24_az', 'PRN24_ss', 'PRN24_used'
+                                       'PRN25_el', 'PRN25_az', 'PRN25_ss', 'PRN25_used'
+                                       'PRN26_el', 'PRN26_az', 'PRN26_ss', 'PRN26_used'
+                                       'PRN27_el', 'PRN27_az', 'PRN27_ss', 'PRN27_used'
+                                       'PRN28_el', 'PRN28_az', 'PRN28_ss', 'PRN28_used'
+                                       'PRN29_el', 'PRN29_az', 'PRN29_ss', 'PRN29_used'
+                                       'PRN30_el', 'PRN30_az', 'PRN30_ss', 'PRN30_used'
+                                       'PRN31_el', 'PRN31_az', 'PRN31_ss', 'PRN31_used'
+                                       'PRN32_el', 'PRN32_az', 'PRN32_ss', 'PRN32_used'
                                        ])
+
+    # populate the tuple
+    gps_data = GPS_data(tpv_time=tpv['time'], sky_time=sky['time'],
+                        lat=tpv['lat'], lon=tpv['lon'], alt=tpv['alt'], epx=tpv['epx'], epy=tpv['epy'], epv=tpv['epv'],
+                        xdop=sky['xdop'], ydop=sky['ydop'], vdop=sky['vdop'], tdop=sky['tdop'], hdop=sky['hdop'], gdop=sky['gdop'], pdop=sky['pdop'],
+                        PRN1_el=
+
 
 
     return (sky, tpv)
