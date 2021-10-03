@@ -222,11 +222,13 @@ def get_gps_stats():
     prn_used = [-1] * 32
     
     for sat in sky['satellites']:
+        # only PRN less than 32
         prn = sat['PRN'] - 1
-        prn_el[prn] = sat['el']
-        prn_az[prn] = sat['az']
-        prn_ss[prn] = sat['ss']
-        prn_used[prn] = int(sat['used']) 
+        if prn < 31:
+            prn_el[prn] = sat['el']
+            prn_az[prn] = sat['az']
+            prn_ss[prn] = sat['ss']
+            prn_used[prn] = int(sat['used']) 
 
     # TPV
     process = subprocess.run('gpspipe -w -T %s | grep -m 1 TPV', shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
@@ -277,7 +279,7 @@ def get_gps_stats():
     gps_data = GPS_data(tpv_time=tpv['time'], sky_time=sky['time'],
                         lat=tpv['lat'], lon=tpv['lon'], alt=tpv['alt'], epx=tpv['epx'], epy=tpv['epy'], epv=tpv['epv'],
                         xdop=sky['xdop'], ydop=sky['ydop'], vdop=sky['vdop'], tdop=sky['tdop'], hdop=sky['hdop'], gdop=sky['gdop'], pdop=sky['pdop'],
-                        PRN1_el=
+                        )
 
 
 
